@@ -1,0 +1,250 @@
+ 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.StringTokenizer;
+ 
+public class KLCMEasy {
+    
+    public static void main(String[] args) {
+        
+        FastReader in = new FastReader();
+        StringBuffer sb = new StringBuffer();
+ 
+        int t = in.nextInt();
+ 
+        while (t > 0) {
+ 
+            int n = in.nextInt();
+            in.nextInt();
+ 
+            if (n % 2 == 0) {
+ 
+                if (n % 4 == 0) {
+ 
+                    sb.append(n/2 + " " + n/4 + " " + n/4 + "\n");
+ 
+                } else {
+ 
+                    sb.append((n/2 - 1) + " " + ((n/2) - 1) + " " + 2 + "\n");
+ 
+                }
+ 
+            } else {
+ 
+                sb.append(n/2 + " " + n/2 + " " + 1 + "\n");
+ 
+            }
+ 
+            t--;
+ 
+        }
+ 
+        in.print(sb);
+        in.close();
+        
+    }
+ 
+    static int gcd (int a, int b) {
+        
+        if (b == 0) {
+ 
+            return a;
+ 
+        } else {
+ 
+            return gcd(b, a % b);
+ 
+        }
+ 
+    }
+ 
+    static long gcd (long a, long b) {
+        
+        if (b == 0) {
+ 
+            return a;
+ 
+        } else {
+ 
+            return gcd(b, a % b);
+ 
+        }
+ 
+    }
+ 
+    static long lcm (int a, int b) {
+ 
+        return (long) a / gcd(a, b) * b;
+ 
+    }
+ 
+    static long lcm (long a, long b) {
+ 
+        return a / gcd(a, b) * b;
+ 
+    }
+ 
+    public static int search (int l, int r, int[] a, int key) {
+ 
+        while (l <= r) {
+ 
+            int middle = ((r - l) / 2) + l;
+ 
+            if (a[middle] == key) {
+ 
+                return middle;
+ 
+            } else if (a[middle] < key) {
+ 
+                l = middle + 1;
+ 
+            } else {
+ 
+                r = middle - 1;
+ 
+            }
+ 
+        }
+ 
+        return -1;
+ 
+    }
+ 
+    public static void sort (int[] a) {
+ 
+		ArrayList<Integer> l=new ArrayList<>();
+		for (int i:a) l.add(i);
+		Collections.sort(l);
+		for (int i=0; i<a.length; i++) a[i]=l.get(i);
+        
+	}
+ 
+    public static void sort (long[] a) {
+ 
+		ArrayList<Long> l=new ArrayList<>();
+		for (long i:a) l.add(i);
+		Collections.sort(l);
+		for (int i=0; i<a.length; i++) a[i]=l.get(i);
+ 
+	}
+ 
+    static class FastReader extends PrintWriter {
+ 
+        BufferedReader br;
+        StringTokenizer st;
+ 
+        public FastReader() {
+ 
+            this(System.in, System.out); 
+            
+        }
+ 
+		public FastReader(InputStream i, OutputStream o) {
+ 
+			super(o);
+			br = new BufferedReader(new InputStreamReader(i));
+ 
+		}
+ 
+        public FastReader(String problemName) throws IOException {
+ 
+			super(new FileWriter(problemName + ".out"));
+			br = new BufferedReader(new FileReader(problemName + ".in"));
+ 
+		}
+ 
+        public String next() {
+ 
+            while (st == null || !st.hasMoreElements()) {
+ 
+                try {
+ 
+                    st = new StringTokenizer(br.readLine());
+ 
+                } catch (IOException e) {
+ 
+                    e.printStackTrace();
+ 
+                }
+ 
+            }
+ 
+            return st.nextToken();
+ 
+        }
+ 
+        public int nextInt() {
+ 
+            return Integer.parseInt(next());
+ 
+        }
+ 
+        public long nextLong() {
+ 
+            return Long.parseLong(next());
+ 
+        }
+ 
+        public double nextDouble() {
+ 
+            return Double.parseDouble(next());
+ 
+        }
+ 
+        public String nextLine() {
+ 
+            String str = "";
+ 
+            try {
+ 
+                str = br.readLine();
+ 
+            } catch (IOException e) {
+ 
+                e.printStackTrace();
+ 
+            }
+ 
+            return str;
+ 
+        }
+ 
+        public int[] readArray(int n) {
+ 
+			int[] a = new int[n];
+ 
+			for (int i = 0; i < n; i++) {
+                
+                a[i] = nextInt();
+			
+            }
+ 
+            return a;
+ 
+		}
+ 
+        public long[] readArrayLong(long n) {
+ 
+			long[] a = new long[(int) n];
+ 
+			for (int i = 0; i < n; i++) {
+                
+                a[i] = nextLong();
+			
+            }
+ 
+            return a;
+ 
+		}
+ 
+    }
+ 
+}
